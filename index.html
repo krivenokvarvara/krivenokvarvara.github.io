@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cold Reply — генератор отказов</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="hero-badge">Cold Reply</div>
+      <h1>Генератор отказов, который помогает держать границы красиво</h1>
+      <p class="hero-text">
+        Выбери ситуацию, тон и контекст. Сервис соберёт короткий ответ, нормальную версию,
+        жёсткую версию, follow-up на случай давления и голосовой вариант.
+      </p>
+    </header>
+
+    <main class="layout">
+      <section class="panel form-panel">
+        <div class="panel-head">
+          <h2>Ввод</h2>
+          <p>Чем точнее контекст, тем сильнее результат.</p>
+        </div>
+
+        <div class="grid two-cols">
+          <label class="field">
+            <span>Ситуация</span>
+            <select id="category">
+              <option value="date">Отказ в свидании / романтическом общении</option>
+              <option value="ex">Отказ бывшему</option>
+              <option value="friend">Отказ во встрече / приглашении</option>
+              <option value="recruiter">Отказ рекрутеру / вакансии</option>
+              <option value="client">Отказ клиенту / проекту</option>
+              <option value="money">Отказ одолжить деньги</option>
+              <option value="freework">Отказ сделать бесплатно</option>
+              <option value="relative">Отказ родственнику / знакомому</option>
+              <option value="general">Другая ситуация</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Стиль</span>
+            <select id="tone">
+              <option value="soft">Мягко и вежливо</option>
+              <option value="firm" selected>Уважительно, но твёрдо</option>
+              <option value="cold">Холодно и кратко</option>
+              <option value="formal">Официально</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="grid two-cols">
+          <label class="field">
+            <span>Кто тебе пишет</span>
+            <input id="who" type="text" placeholder="например: бывший, HR из банка, знакомый" />
+          </label>
+
+          <label class="field">
+            <span>Что именно от тебя хотят</span>
+            <input id="request" type="text" placeholder="например: встретиться в субботу, сделать дизайн бесплатно" />
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Контекст</span>
+          <textarea id="context" rows="4" placeholder="Например: человек пишет уже третий раз, я не хочу обижать, но и давать надежду тоже не хочу."></textarea>
+        </label>
+
+        <div class="grid two-cols">
+          <label class="field">
+            <span>Чего ты хочешь избежать</span>
+            <select id="avoid">
+              <option value="hope">Не оставить ложную надежду</option>
+              <option value="guilt">Не чувствовать вину</option>
+              <option value="conflict">Избежать конфликта</option>
+              <option value="pressure">Чтобы не продавили повторно</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Можно оставить шанс на будущее?</span>
+            <select id="door">
+              <option value="no" selected>Нет</option>
+              <option value="yes">Да, но очень аккуратно</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="grid two-cols">
+          <label class="field checkbox-field">
+            <input id="canLie" type="checkbox" />
+            <span>Можно использовать нейтральное оправдание</span>
+          </label>
+
+          <label class="field checkbox-field">
+            <input id="extraDirect" type="checkbox" />
+            <span>Сделать результат жёстче обычного</span>
+          </label>
+        </div>
+
+        <div class="actions">
+          <button id="generateBtn" class="primary-btn">Сгенерировать отказ</button>
+          <button id="colderBtn" class="ghost-btn">Сделать холоднее</button>
+          <button id="shorterBtn" class="ghost-btn">Сделать короче</button>
+        </div>
+      </section>
+
+      <section class="panel result-panel">
+        <div class="panel-head">
+          <h2>Результат</h2>
+          <p>Нажми на кнопку Copy у нужного блока.</p>
+        </div>
+
+        <div id="emptyState" class="empty-state">
+          Заполни форму и нажми «Сгенерировать отказ».
+        </div>
+
+        <div id="results" class="results hidden">
+          <div class="result-card">
+            <div class="result-top">
+              <h3>Короткий вариант</h3>
+              <button class="copy-btn" data-copy="shortText">Copy</button>
+            </div>
+            <p id="shortText"></p>
+          </div>
+
+          <div class="result-card">
+            <div class="result-top">
+              <h3>Нормальный вариант</h3>
+              <button class="copy-btn" data-copy="normalText">Copy</button>
+            </div>
+            <p id="normalText"></p>
+          </div>
+
+          <div class="result-card">
+            <div class="result-top">
+              <h3>Очень твёрдый вариант</h3>
+              <button class="copy-btn" data-copy="firmText">Copy</button>
+            </div>
+            <p id="firmText"></p>
+          </div>
+
+          <div class="result-card">
+            <div class="result-top">
+              <h3>Если начнут давить</h3>
+              <button class="copy-btn" data-copy="followText">Copy</button>
+            </div>
+            <p id="followText"></p>
+          </div>
+
+          <div class="result-card">
+            <div class="result-top">
+              <h3>Версия для голосового</h3>
+              <button class="copy-btn" data-copy="voiceText">Copy</button>
+            </div>
+            <p id="voiceText"></p>
+          </div>
+
+          <div class="result-card">
+            <div class="result-top">
+              <h3>Что не стоит писать</h3>
+            </div>
+            <ul id="warningsList" class="warnings-list"></ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast hidden">Скопировано</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
