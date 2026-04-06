@@ -3,205 +3,173 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Version of You</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Cold Reply — генератор отказов</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="page-shell">
-    <div class="bg-orb orb-1"></div>
-    <div class="bg-orb orb-2"></div>
-    <div class="bg-orb orb-3"></div>
-    <div class="grain"></div>
-
+  <div class="page">
     <header class="hero">
-      <div class="hero-topline">Aesthetic identity test</div>
-      <div class="hero-grid">
-        <div>
-          <div class="brand-chip">Version of You</div>
-          <h1>Собери свою версию себя — не просто красивую, а точную.</h1>
-          <p class="hero-copy">
-            7 вопросов. Один результат, в котором сходятся твой вайб, архетип,
-            палитра, фильмы, музыка, стиль и фраза, которая звучит как ты.
-          </p>
-
-          <div class="hero-actions">
-            <button class="primary-btn" id="startBtn">Пройти тест</button>
-            <a class="ghost-btn" href="#how-it-works">Что внутри</a>
-          </div>
-        </div>
-
-        <div class="hero-card">
-          <div class="hero-card-glow"></div>
-          <div class="hero-card-inner">
-            <div class="mini-label">Пример результата</div>
-            <h2>Soft Distance Muse</h2>
-            <p>
-              Ты выглядишь мягко, но внутри живёшь на точной дистанции. Люди
-              считывают в тебе холод, хотя на самом деле ты просто не пускаешь
-              близко всё подряд.
-            </p>
-            <div class="mini-palette">
-              <span style="background:#d8c6ff"></span>
-              <span style="background:#b4a7d6"></span>
-              <span style="background:#5d6075"></span>
-              <span style="background:#1e2237"></span>
-            </div>
-            <div class="mini-tags">
-              <span>архетип</span>
-              <span>фильмы</span>
-              <span>музыка</span>
-              <span>стиль</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="hero-badge">Cold Reply</div>
+      <h1>Генератор отказов, который помогает держать границы красиво</h1>
+      <p class="hero-text">
+        Выбери ситуацию, тон и контекст. Сервис соберёт короткий ответ, нормальную версию,
+        жёсткую версию, follow-up на случай давления и голосовой вариант.
+      </p>
     </header>
 
-    <section class="feature-strip" id="how-it-works">
-      <article class="feature-card">
-        <div class="feature-number">01</div>
-        <h3>Ответы не про “хаос или тишина”</h3>
-        <p>Вопросы построены через сцену, внутреннее состояние, защиту и self-image.</p>
-      </article>
-      <article class="feature-card">
-        <div class="feature-number">02</div>
-        <h3>Результат выглядит как карта личности</h3>
-        <p>Ты получаешь не тестик, а стильную identity-card с логикой и деталями.</p>
-      </article>
-      <article class="feature-card">
-        <div class="feature-number">03</div>
-        <h3>Всё работает без сервера</h3>
-        <p>Обычный статический сайт. Подходит для GitHub Pages без сложной сборки.</p>
-      </article>
-    </section>
-
-    <main class="app-grid">
-      <section class="quiz-panel" id="quizPanel">
+    <main class="layout">
+      <section class="panel form-panel">
         <div class="panel-head">
-          <div>
-            <div class="eyebrow">Test flow</div>
-            <h2 id="questionTitle">Готова узнать свою версию?</h2>
-            <p id="questionHint">Отвечай не “как надо”, а как по ощущениям.</p>
-          </div>
-          <div class="step-pill" id="stepPill">Intro</div>
+          <h2>Ввод</h2>
+          <p>Чем точнее контекст, тем сильнее результат.</p>
         </div>
 
-        <div class="progress-wrap">
-          <div class="progress-bar"><div id="progressFill"></div></div>
-          <div class="progress-meta"><span id="progressText">0 / 7</span><span>version scan</span></div>
+        <div class="grid two-cols">
+          <label class="field">
+            <span>Ситуация</span>
+            <select id="category">
+              <option value="date">Отказ в свидании / романтическом общении</option>
+              <option value="ex">Отказ бывшему</option>
+              <option value="friend">Отказ во встрече / приглашении</option>
+              <option value="recruiter">Отказ рекрутеру / вакансии</option>
+              <option value="client">Отказ клиенту / проекту</option>
+              <option value="money">Отказ одолжить деньги</option>
+              <option value="freework">Отказ сделать бесплатно</option>
+              <option value="relative">Отказ родственнику / знакомому</option>
+              <option value="general">Другая ситуация</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Стиль</span>
+            <select id="tone">
+              <option value="soft">Мягко и вежливо</option>
+              <option value="firm" selected>Уважительно, но твёрдо</option>
+              <option value="cold">Холодно и кратко</option>
+              <option value="formal">Официально</option>
+            </select>
+          </label>
         </div>
 
-        <div id="introState" class="intro-state">
-          <div class="intro-card">
-            <div class="intro-kicker">Before you start</div>
-            <h3>Этот тест считывает не только вкус, но и то, как ты защищаешься, что в тебе люди понимают неправильно и какая версия тебя сейчас просится наружу.</h3>
-            <p>
-              В конце ты получишь:<br>
-              — название твоей версии<br>
-              — палитру<br>
-              — архетип<br>
-              — 3 фильма<br>
-              — 3 трека<br>
-              — style direction<br>
-              — личную фразу-манифест
-            </p>
-          </div>
+        <div class="grid two-cols">
+          <label class="field">
+            <span>Кто тебе пишет</span>
+            <input id="who" type="text" placeholder="например: бывший, HR из банка, знакомый" />
+          </label>
+
+          <label class="field">
+            <span>Что именно от тебя хотят</span>
+            <input id="request" type="text" placeholder="например: встретиться в субботу, сделать дизайн бесплатно" />
+          </label>
         </div>
 
-        <div id="questionState" class="question-state hidden">
-          <div class="options-grid" id="optionsGrid"></div>
+        <label class="field">
+          <span>Контекст</span>
+          <textarea id="context" rows="4" placeholder="Например: человек пишет уже третий раз, я не хочу обижать, но и давать надежду тоже не хочу."></textarea>
+        </label>
+
+        <div class="grid two-cols">
+          <label class="field">
+            <span>Чего ты хочешь избежать</span>
+            <select id="avoid">
+              <option value="hope">Не оставить ложную надежду</option>
+              <option value="guilt">Не чувствовать вину</option>
+              <option value="conflict">Избежать конфликта</option>
+              <option value="pressure">Чтобы не продавили повторно</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Можно оставить шанс на будущее?</span>
+            <select id="door">
+              <option value="no" selected>Нет</option>
+              <option value="yes">Да, но очень аккуратно</option>
+            </select>
+          </label>
         </div>
 
-        <div class="panel-actions">
-          <button class="ghost-btn" id="backBtn" disabled>Назад</button>
-          <button class="primary-btn" id="nextBtn" disabled>Дальше</button>
+        <div class="grid two-cols">
+          <label class="field checkbox-field">
+            <input id="canLie" type="checkbox" />
+            <span>Можно использовать нейтральное оправдание</span>
+          </label>
+
+          <label class="field checkbox-field">
+            <input id="extraDirect" type="checkbox" />
+            <span>Сделать результат жёстче обычного</span>
+          </label>
+        </div>
+
+        <div class="actions">
+          <button id="generateBtn" class="primary-btn">Сгенерировать отказ</button>
+          <button id="colderBtn" class="ghost-btn">Сделать холоднее</button>
+          <button id="shorterBtn" class="ghost-btn">Сделать короче</button>
         </div>
       </section>
 
-      <section class="result-panel hidden" id="resultPanel">
-        <div class="panel-head result-head">
-          <div>
-            <div class="eyebrow">Your result</div>
-            <h2 id="resultTitle">Version of You</h2>
-            <p id="resultSubtitle">Здесь появится твоя собранная aesthetic identity.</p>
-          </div>
-          <div class="result-actions-top">
-            <button class="ghost-btn small-btn" id="copyBtn">Скопировать summary</button>
-            <button class="primary-btn small-btn" id="restartBtn">Пройти заново</button>
-          </div>
+      <section class="panel result-panel">
+        <div class="panel-head">
+          <h2>Результат</h2>
+          <p>Нажми на кнопку Copy у нужного блока.</p>
         </div>
 
-        <div class="result-hero" id="resultHero">
-          <div class="identity-card" id="identityCard">
-            <div class="identity-shine"></div>
-            <div class="identity-topline">Version of You</div>
-            <div class="identity-name" id="identityName">—</div>
-            <div class="identity-archetype" id="identityArchetype">—</div>
-            <div class="identity-moodline" id="identityMoodline">—</div>
-            <div class="identity-chips" id="identityChips"></div>
-          </div>
+        <div id="emptyState" class="empty-state">
+          Заполни форму и нажми «Сгенерировать отказ».
+        </div>
 
-          <div class="result-summary-card">
-            <div class="summary-badge">Main read</div>
-            <p id="resultDescription"></p>
-            <div class="personal-insights">
-              <div class="insight-line"><span>People misread you as</span><strong id="misreadLine"></strong></div>
-              <div class="insight-line"><span>In a bad phase you</span><strong id="badPhaseLine"></strong></div>
-              <div class="insight-line"><span>Your current version</span><strong id="currentVersionLine"></strong></div>
+        <div id="results" class="results hidden">
+          <div class="result-card">
+            <div class="result-top">
+              <h3>Короткий вариант</h3>
+              <button class="copy-btn" data-copy="shortText">Copy</button>
             </div>
+            <p id="shortText"></p>
           </div>
-        </div>
 
-        <div class="result-grid">
-          <article class="result-card palette-card">
-            <div class="card-label">Palette</div>
-            <h3>Твои цвета</h3>
-            <div class="palette-row" id="paletteRow"></div>
-            <div class="palette-names" id="paletteNames"></div>
-          </article>
+          <div class="result-card">
+            <div class="result-top">
+              <h3>Нормальный вариант</h3>
+              <button class="copy-btn" data-copy="normalText">Copy</button>
+            </div>
+            <p id="normalText"></p>
+          </div>
 
-          <article class="result-card">
-            <div class="card-label">Cinema</div>
-            <h3>Твои фильмы</h3>
-            <ul class="fancy-list" id="filmsList"></ul>
-          </article>
+          <div class="result-card">
+            <div class="result-top">
+              <h3>Очень твёрдый вариант</h3>
+              <button class="copy-btn" data-copy="firmText">Copy</button>
+            </div>
+            <p id="firmText"></p>
+          </div>
 
-          <article class="result-card">
-            <div class="card-label">Soundtrack</div>
-            <h3>Твоя музыка</h3>
-            <ul class="fancy-list" id="musicList"></ul>
-          </article>
+          <div class="result-card">
+            <div class="result-top">
+              <h3>Если начнут давить</h3>
+              <button class="copy-btn" data-copy="followText">Copy</button>
+            </div>
+            <p id="followText"></p>
+          </div>
 
-          <article class="result-card">
-            <div class="card-label">Style</div>
-            <h3>Твой стиль</h3>
-            <ul class="fancy-list" id="styleList"></ul>
-          </article>
+          <div class="result-card">
+            <div class="result-top">
+              <h3>Версия для голосового</h3>
+              <button class="copy-btn" data-copy="voiceText">Copy</button>
+            </div>
+            <p id="voiceText"></p>
+          </div>
 
-          <article class="result-card quote-card">
-            <div class="card-label">Phrase</div>
-            <h3>Твоя фраза</h3>
-            <blockquote id="phraseText"></blockquote>
-          </article>
-
-          <article class="result-card">
-            <div class="card-label">Archetype</div>
-            <h3>Твой архетип</h3>
-            <p class="archetype-copy" id="archetypeText"></p>
-          </article>
+          <div class="result-card">
+            <div class="result-top">
+              <h3>Что не стоит писать</h3>
+            </div>
+            <ul id="warningsList" class="warnings-list"></ul>
+          </div>
         </div>
       </section>
     </main>
-
-    <footer class="footer-note">
-      Version of You — front-only MVP. Можно публиковать через GitHub Pages без сервера.
-    </footer>
   </div>
 
-  <div class="toast hidden" id="toast">Скопировано</div>
+  <div id="toast" class="toast hidden">Скопировано</div>
 
   <script src="script.js"></script>
 </body>
